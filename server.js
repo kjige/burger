@@ -19,13 +19,13 @@ app.use(bodyParser.urlencoded({
 // Override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
 
+app.use("/", routes);
+
 // set handlebars
 app.engine("handlebars", exphbs({
     defaultLayout: "main"
 }));
+
 app.set("view engine", "handlebars");
-
-
-app.use("/", routes);
 
 app.listen(port);

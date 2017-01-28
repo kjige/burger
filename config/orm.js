@@ -1,7 +1,7 @@
 // Import MySQL connection.
 var connection = require("../config/connection.js");
 
-// Helper function for SQL syntax.
+// Helper function for SQL syntax, prints question marks
 function printQuestionMarks(num) {
     var arr = [];
 
@@ -12,7 +12,7 @@ function printQuestionMarks(num) {
     return arr.toString();
 }
 
-// Helper function for SQL syntax.
+// Helper function for SQL syntax, converts object to string
 function objToSql(ob) {
     var arr = [];
 
@@ -27,6 +27,8 @@ function objToSql(ob) {
 
 // Object for all our SQL statement functions.
 var orm = {
+
+    // query to select all data rows
     all: function (tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function (err, result) {
@@ -36,6 +38,8 @@ var orm = {
             cb(result);
         });
     },
+
+    // query to create new data row
     create: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
 
@@ -56,7 +60,8 @@ var orm = {
             cb(result);
         });
     },
-    // An example of objColVals would be {name: panther, eaten: true}
+
+    // query to update a data row
     update: function (table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
 
@@ -74,6 +79,7 @@ var orm = {
         });
     },
 
+    // query to delete a data row
     delete: function (table, condition, cb) {
         var queryString = "DELETE FROM " + table;
 
@@ -90,5 +96,5 @@ var orm = {
     }
 };
 
-// Export the orm object for the model (cat.js).
+// Export the orm object for the model (burger.js).
 module.exports = orm;
